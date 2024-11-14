@@ -1,0 +1,156 @@
+**Add vars for PSS3, and Secondary screneer (SSc ONLY for ICR);
+*PSS3 - Q1;
+if past2weeks_felt_down=1 or past2weeks_depressed=1 or past2weeks_hopeless=1 then depressed_pss3_inp = 1;
+if past2weeks_felt_down=0 & past2weeks_depressed=0 & past2weeks_hopeless=0 & depressed_pss3_inp ~= 1 then depressed_pss3_inp = 0;
+if (past2weeks_felt_down=77 or past2weeks_depressed=77 or past2weeks_hopeless=77) & depressed_pss3_inp ~in(1,0) then depressed_pss3_inp = 77;
+if (past2weeks_felt_down=88 or past2weeks_depressed=88 or past2weeks_hopeless=88) & depressed_pss3_inp ~in(1,0,77) then depressed_pss3_inp = 88;
+if (past2weeks_felt_down=888 or past2weeks_depressed=888 or past2weeks_hopeless=888) & depressed_pss3_inp ~in(1,0,77, 88) then depressed_pss3_inp = 888;
+if (past2weeks_felt_down=999 or past2weeks_depressed=999 or past2weeks_hopeless=999) & depressed_pss3_inp ~in(1,0,77, 88, 888) then depressed_pss3_inp = 999;
+
+if felt_down=1 then depressed_pss3_icr = 1;
+if felt_down=0 then depressed_pss3_icr = 0;
+if felt_down=2 then depressed_pss3_icr = 2;
+if felt_down=77 then depressed_pss3_icr = 77;
+if felt_down=88 then depressed_pss3_icr = 88;
+if felt_down ~in(0,1,2,77,88) then depressed_pss3_icr =999;
+
+*PSS3 - Q2(chk);
+if (kill_self_thts_when___3=1 | kill_self_thts_when___4=1 | kill_self_thts_when___5=1) then ideation_pss3_inp = 1;
+if (kill_self_thts=0 or (kill_self_thts_when___3=0 & kill_self_thts_when___4=0 & kill_self_thts_when___5=0)) & ideation_pss3_inp ~= 1 then ideation_pss3_inp = 0;
+if kill_self_thts=77 & ideation_pss3_inp ~in(1,0) then ideation_pss3_inp = 77;
+if kill_self_thts=88 & ideation_pss3_inp ~in(1,0,77) then ideation_pss3_inp = 88;
+if kill_self_thts=888 & ideation_pss3_inp ~in(1,0, 77, 88) then ideation_pss3_inp = 888;
+if kill_self_thts=999 & ideation_pss3_inp ~in(1,0, 77, 88) then ideation_pss3_inp = 999;
+
+if thoughts_killing=1  then ideation_pss3_icr=1;
+if thoughts_killing=0 then ideation_pss3_icr=0;
+if thoughts_killing=2 then ideation_pss3_icr=2;
+if thoughts_killing=77 then ideation_pss3_icr=77;
+if thoughts_killing=88 then ideation_pss3_icr=88;
+if thoughts_killing ~in(0,1,2,77,88) then ideation_pss3_icr=999;
+
+*PSS3 - Q3;
+if kill_self_attempt=1 then attempt_life_pss3_inp=1;
+if kill_self_attempt=0 then attempt_life_pss3_inp=0;
+if kill_self_attempt=77 then attempt_life_pss3_inp=77;
+if kill_self_attempt=88 then attempt_life_pss3_inp=88;
+if kill_self_attempt=999 then attempt_life_pss3_inp=999;
+
+if attempt_kill_yourself=1 then attempt_life_pss3_icr=1;
+if attempt_kill_yourself=0 then attempt_life_pss3_icr=0;
+if attempt_kill_yourself=77 then attempt_life_pss3_icr=77;
+if attempt_kill_yourself=88 then attempt_life_pss3_icr=88;
+if attempt_kill_yourself ~in(0,1,77,88) then attempt_life_pss3_icr=999;
+
+*PSS3 - Q3a;
+if (kill_self_attempt_when___2=1 | kill_self_attempt_when___3=1 | kill_self_attempt_when___4=1 | kill_self_attempt_when___5=1) then attempt_in6mon_pss3_inp=1;
+if ((kill_self_attempt_when___2=0 & kill_self_attempt_when___3=0 & kill_self_attempt_when___4=0 & kill_self_attempt_when___5=0) | kill_self_attempt_when___1=1) & attempt_in6mon_pss3_inp ~=1 then attempt_in6mon_pss3_inp=0;
+if kill_self_attempt_when___77=1 & attempt_in6mon_pss3_inp ~in(1, 0) then attempt_in6mon_pss3_inp=77;
+if (kill_self_attempt_when___2=999 | kill_self_attempt_when___3=999 | kill_self_attempt_when___4=999 | kill_self_attempt_when___5=999 | kill_self_attempt_when___1=999) & attempt_in6mon_pss3_inp ~in(1, 0, 77) then attempt_in6mon_pss3_inp=999;
+
+if attempt_kill_yourself_last in(1, 2, 3) then attempt_in6mon_pss3_icr=1;
+if attempt_kill_yourself_last in(4) then attempt_in6mon_pss3_icr=0;
+if attempt_kill_yourself_last in(5) then attempt_in6mon_pss3_icr=2;
+if attempt_kill_yourself_last in(77) then attempt_in6mon_pss3_icr=77;
+if attempt_kill_yourself_last in(88) then attempt_in6mon_pss3_icr=88;
+if attempt_in6mon_pss3_icr ~in(0, 1, 2, 3, 4, 5, 77, 88) then attempt_in6mon_pss3_icr=999;
+
+
+**Positive PSS3 (recode 77 & 88 as 0 per Dr. Boudreaux on 9/24/24;
+if ideation_pss3_inp = 1 or attempt_in6mon_pss3_inp=1 then screen_positive_pss3_inp=1;
+if (ideation_pss3_inp = 0 & attempt_in6mon_pss3_inp=0) & screen_positive_pss3_inp ~=1 then screen_positive_pss3_inp=0;
+if (ideation_pss3_inp = 77 or attempt_in6mon_pss3_inp=77) & screen_positive_pss3_inp ~in(1) then screen_positive_pss3_inp=0;
+if (ideation_pss3_inp = 999 or attempt_in6mon_pss3_inp=999) & screen_positive_pss3_inp ~in(0, 1) then screen_positive_pss3_inp=999;
+
+if ideation_pss3_icr = 1 or attempt_in6mon_pss3_icr =1 then screen_positive_pss3_icr=1;
+if (ideation_pss3_icr = 0 & attempt_in6mon_pss3_icr ~=1) & screen_positive_pss3_icr ~=1 then screen_positive_pss3_icr=0;
+if (ideation_pss3_icr = 77 or attempt_in6mon_pss3_icr=77) & screen_positive_pss3_icr ~in(1) then screen_positive_pss3_icr=0;
+if (ideation_pss3_icr = 88 or attempt_in6mon_pss3_icr=88) & screen_positive_pss3_icr ~in(1) then screen_positive_pss3_icr=0;
+if (ideation_pss3_icr = 999 or attempt_in6mon_pss3_icr=999) & screen_positive_pss3_icr ~in(0, 1) then screen_positive_pss3_icr=999;
+
+**2nd screener;
+*inp;
+if ideation_pss3_inp = 1 & attempt_life_pss3_inp=1 then sec_screen_both_inp=1;
+else sec_screen_both_inp=0;
+
+if kill_self_thts_plan_when___3=1 or   kill_self_thts_plan_when___4=1 then sec_screen_plan_inp=1;
+else sec_screen_plan_inp=0;
+
+if KILL_SELF_INTENT_WHEN___3=1 or KILL_SELF_INTENT_WHEN___4=1 then sec_screen_intent_inp=1;
+else sec_screen_intent_inp=0;
+
+if hosp_ever_psych in(1,2,3,4,5,77) then sec_screen_psyhosp_inp=1;
+else sec_screen_psyhosp_inp=0;
+
+if alch_diag=1 OR drug_diag=1 OR er_ever_alch in(1, 2, 3, 4, 5, 77) OR er_ever_drugs in(1, 2, 3, 4, 5,77) OR hosp_ever_alch in(1, 2, 3, 4, 5,77) OR hosp_ever_drugs in(1, 2, 3, 4, 5,77) OR drinks_months=1 OR past2weeks_drugs=1
+   then sec_screen_drug_inp=1;
+else sec_screen_drug_inp=0;
+
+if past2weeks_conflicts=1 or past2weeks_agitated=1 then sec_screen_agitated_inp=1;
+else sec_screen_agitated_inp=0;
+
+*ICR;
+if sscreen_ideation_attempt=1 then sec_screen_both_icr=1;
+if sscreen_ideation_attempt in(0, 77, 88) then sec_screen_both_icr=0;
+
+if sscreen_plan=1 then sec_screen_plan_icr=1;
+if sscreen_plan in(0, 77, 88) then sec_screen_plan_icr=0;
+
+if sscreen_intent=1 then sec_screen_intent_icr=1;
+if sscreen_intent in(0, 77, 88) then sec_screen_intent_icr=0;
+
+if sscreen_psych_hosp=1 then sec_screen_psyhosp_icr=1;
+if sscreen_psych_hosp in(0, 77, 88) then sec_screen_psyhosp_icr=0;
+
+if sscreen_drugs=1 then sec_screen_drug_icr=1;
+if sscreen_drugs in(0, 77, 88) then sec_screen_drug_icr=0;
+
+if sscreen_irritable=1 then sec_screen_agitated_icr=1;
+if sscreen_irritable in(0, 77, 88) then sec_screen_agitated_icr=0;
+
+if screen_positive_pss3_inp=1 then psssecscreen_score_inp=sum(sec_screen_both_inp, sec_screen_plan_inp, sec_screen_intent_inp, sec_screen_psyhosp_inp, sec_screen_drug_inp, sec_screen_agitated_inp);
+
+if screen_positive_pss3_icr=1 then psssecscreen_score_icr=sum(sec_screen_both_icr, sec_screen_plan_icr, sec_screen_intent_icr, sec_screen_psyhosp_icr, sec_screen_drug_icr, sec_screen_agitated_icr);
+
+if screen_positive_pss3_inp=1 & (psssecscreen_score_inp in(5, 6) or (sec_screen_plan_inp=1 & sec_screen_intent_inp=1) or kill_self_attempt_when___5=1) then psssecscreen_strata_inp=3;
+if screen_positive_pss3_inp=1 & (psssecscreen_score_inp in(3, 4) or (sec_screen_plan_inp=1 or sec_screen_intent_inp=1)) & psssecscreen_strata_inp ~=3 then psssecscreen_strata_inp=2;
+if screen_positive_pss3_inp=1 & psssecscreen_strata_inp ~in(3, 2) then psssecscreen_strata_inp=1;
+if screen_positive_pss3_inp=0 & psssecscreen_strata_inp ~in(1,2,3) then psssecscreen_strata_inp=0;
+
+if screen_positive_pss3_icr=1 & (psssecscreen_score_icr in(5, 6) or (sec_screen_plan_icr=1 & sec_screen_intent_icr=1) or attempt_kill_yourself_last=1) then psssecscreen_strata_icr=3;
+if screen_positive_pss3_icr=1 & (psssecscreen_score_icr in(3, 4) or (sec_screen_plan_icr=1 or sec_screen_intent_icr=1) & psssecscreen_strata_icr ~=3) then psssecscreen_strata_icr=2;
+if screen_positive_pss3_icr=1 & psssecscreen_strata_icr ~in(3, 2) then psssecscreen_strata_icr=1;
+if screen_positive_pss3_icr=0 & psssecscreen_strata_icr ~in(1,2,3) then psssecscreen_strata_icr=0;
+
+label depressed_pss3_inp="PSS3_Interview_1_Depressed Mood assessed by indictor pool"
+      depressed_pss3_icr="PSS3_Interview_1_Depressed Mood assessed by index chart review"
+      ideation_pss3_inp="PSS3_2_Interview_Active-Suicidal-Ideation assessed by indictor pool"
+      ideation_pss3_icr="PSS3_2_Interview_Active-Suicidal-Ideation assessed by index chart review"
+      attempt_life_pss3_inp = "PSS3_3_Interview_Lifetime-Suicide-Attempt assessed by indictor pool"
+      attempt_life_pss3_icr = "PSS3_3_Interview_Lifetime-Suicide-Attempt assessed by index chart review"
+      attempt_in6mon_pss3_inp="PSS3_3a attempt in the past 6 months assessed by indictor pool"
+      attempt_in6mon_pss3_icr="PSS3_3a attempt in the past 6 months assessed by index chart review"
+      screen_positive_pss3_inp = "PSS3_screen positive for ideation or attempt assessed by indictor pool"
+      screen_positive_pss3_icr = "PSS3_screen positive for ideation or attempt assessed by index chart review"
+      sec_screen_both_inp = "Patient sec-screened positive on BOTH ideation in past 2 weeks AND attempt in past 6 months (by IP)"
+      sec_screen_both_icr = "Patient sec-screened positive on BOTH ideation in past 2 weeks AND attempt in past 6 months (by index chart review)"
+	    sec_screen_plan_inp = "Has the individual begun a suicide plan? (by sec-screener IP)"
+	    sec_screen_plan_icr = "Has the individual begun a suicide plan? (by sec-screener index chart review)"
+	    sec_screen_intent_inp = "Has the individual recently had intent to act on his/her ideation? (by sec-screener IP)"
+	    sec_screen_intent_icr = "Has the individual recently had intent to act on his/her ideation? (by sec-screener index chart review)"
+	    sec_screen_psyhosp_inp = "Has the patient ever had a psychiatric hospitalization? (by sec-screener IP)"
+	    sec_screen_psyhosp_icr = "Has the patient ever had a psychiatric hospitalization? (by sec-screener index chart review)"
+	    sec_screen_drug_inp = "Does the patient have a pattern of excessive substance use? (by sec-screener IP)"
+	    sec_screen_drug_icr = "Does the patient have a pattern of excessive substance use? (by sec-screener index chart review)"
+	    sec_screen_agitated_inp = "Is the patient irritable, agitated, or aggressive? (by sec-screener IP)"
+	    sec_screen_agitated_icr = "Is the patient irritable, agitated, or aggressive? (by sec-screener index chart review)"
+	    psssecscreen_strata_inp = "Suicide risk level assessed by IP secondary screener (for positive PSS3)"
+	    psssecscreen_strata_icr = "Suicide risk level assessed by index chart review secondary screener (for positive PSS3)"
+	    cssrs_strata = "Suicide risk level assessed by CSSRS screener"
+      ;
+format depressed_pss3_inp ideation_pss3_inp attempt_life_pss3_inp attempt_in6mon_pss3_inp screen_positive_pss3_inp new_inp_.;
+format sec_screen_both_inp sec_screen_plan_inp sec_screen_intent_inp sec_screen_psyhosp_inp sec_screen_drug_inp sec_screen_agitated_inp yesno_.;
+format sec_screen_both_icr sec_screen_plan_icr sec_screen_intent_icr sec_screen_psyhosp_icr sec_screen_drug_icr sec_screen_agitated_icr yesno_.;
+run;
+
+
